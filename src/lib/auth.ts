@@ -25,16 +25,16 @@ export const authOptions: NextAuthOptions = {
   },
   cookies: {
     sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+      name: `next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: false, // Allow cookies over HTTP for local development
+        secure: false,
       },
     },
     callbackUrl: {
-      name: `__Secure-next-auth.callback-url`,
+      name: `next-auth.callback-url`,
       options: {
         sameSite: 'lax',
         path: '/',
@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
     csrfToken: {
-      name: `__Host-next-auth.csrf-token`,
+      name: `next-auth.csrf-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
