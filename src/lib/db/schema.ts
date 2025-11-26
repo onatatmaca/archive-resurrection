@@ -8,18 +8,18 @@ export const users = pgTable('user', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name'),
   email: text('email').notNull().unique(),
-  emailVerified: timestamp('email_verified'),
+  emailVerified: timestamp('emailVerified'),
   image: text('image'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
 });
 
 // Accounts table (for NextAuth OAuth)
 export const accounts = pgTable('account', {
   id: uuid('id').defaultRandom().primaryKey(),
-  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  userId: uuid('userId').references(() => users.id, { onDelete: 'cascade' }).notNull(),
   type: text('type').notNull(),
   provider: text('provider').notNull(),
-  providerAccountId: text('provider_account_id').notNull(),
+  providerAccountId: text('providerAccountId').notNull(),
   refresh_token: text('refresh_token'),
   access_token: text('access_token'),
   expires_at: timestamp('expires_at'),
@@ -32,8 +32,8 @@ export const accounts = pgTable('account', {
 // Sessions table (for NextAuth)
 export const sessions = pgTable('session', {
   id: uuid('id').defaultRandom().primaryKey(),
-  sessionToken: text('session_token').notNull().unique(),
-  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  sessionToken: text('sessionToken').notNull().unique(),
+  userId: uuid('userId').references(() => users.id, { onDelete: 'cascade' }).notNull(),
   expires: timestamp('expires').notNull(),
 });
 
