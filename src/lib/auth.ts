@@ -12,9 +12,17 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: async ({ session, user }) => {
+    async jwt({ token, user, account }) {
+      // On sign in, add user data to the token
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Add user id from token to session
       if (session?.user) {
-        session.user.id = user.id;
+        session.user.id = token.id as string;
       }
       return session;
     },
