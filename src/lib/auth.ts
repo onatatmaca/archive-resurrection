@@ -23,4 +23,32 @@ export const authOptions: NextAuthOptions = {
     strategy: 'database',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: false, // Allow cookies over HTTP for local development
+      },
+    },
+    callbackUrl: {
+      name: `__Secure-next-auth.callback-url`,
+      options: {
+        sameSite: 'lax',
+        path: '/',
+        secure: false,
+      },
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: false,
+      },
+    },
+  },
 };
