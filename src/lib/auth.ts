@@ -20,19 +20,8 @@ export const authOptions: NextAuthOptions = {
     },
   },
   session: {
-    strategy: 'database',
+    strategy: 'jwt', // Use JWT instead of database sessions for HTTP compatibility
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   useSecureCookies: false,
-  cookies: {
-    sessionToken: {
-      name: 'next-auth.session-token',
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: false,
-      },
-    },
-  },
 };
