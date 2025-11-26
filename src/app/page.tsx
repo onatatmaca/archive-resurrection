@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
-import { FileText, Upload, Search, Sparkles } from "lucide-react";
+import { FileText, Upload, Search, Sparkles, Grid, BookOpen } from "lucide-react";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -18,20 +18,34 @@ export default async function Home() {
         </p>
 
         {session ? (
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-3 justify-center flex-wrap">
             <Link
-              href="/upload"
+              href="/browse"
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
             >
+              <Grid className="w-5 h-5" />
+              Browse Archive
+            </Link>
+            <Link
+              href="/upload"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center gap-2"
+            >
               <Upload className="w-5 h-5" />
-              Upload Archive
+              Upload File
+            </Link>
+            <Link
+              href="/wiki/new"
+              className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition flex items-center gap-2"
+            >
+              <BookOpen className="w-5 h-5" />
+              New Wiki Page
             </Link>
             <Link
               href="/search"
               className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition flex items-center gap-2"
             >
               <Search className="w-5 h-5" />
-              Search Archive
+              Search
             </Link>
           </div>
         ) : (
@@ -45,12 +59,20 @@ export default async function Home() {
       </div>
 
       {/* Features Grid */}
-      <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
         <div className="p-6 border rounded-lg dark:border-gray-700">
           <FileText className="w-12 h-12 text-blue-600 mb-4" />
-          <h3 className="text-xl font-semibold mb-2">Smart Organization</h3>
+          <h3 className="text-xl font-semibold mb-2">File Archive</h3>
           <p className="text-gray-600 dark:text-gray-400">
-            Automatic tagging and categorization of all your documents, photos, and archives
+            Upload and organize documents, photos, and archives with smart tagging
+          </p>
+        </div>
+
+        <div className="p-6 border rounded-lg dark:border-gray-700">
+          <BookOpen className="w-12 h-12 text-orange-600 mb-4" />
+          <h3 className="text-xl font-semibold mb-2">Wiki Pages</h3>
+          <p className="text-gray-600 dark:text-gray-400">
+            Create collaborative knowledge pages with markdown support and internal linking
           </p>
         </div>
 
@@ -58,15 +80,15 @@ export default async function Home() {
           <Search className="w-12 h-12 text-purple-600 mb-4" />
           <h3 className="text-xl font-semibold mb-2">Semantic Search</h3>
           <p className="text-gray-600 dark:text-gray-400">
-            Find documents by meaning, not just keywords. Ask questions in natural language
+            Find content by meaning, not just keywords. AI-powered search coming soon
           </p>
         </div>
 
         <div className="p-6 border rounded-lg dark:border-gray-700">
           <Sparkles className="w-12 h-12 text-pink-600 mb-4" />
-          <h3 className="text-xl font-semibold mb-2">AI-Powered Insights</h3>
+          <h3 className="text-xl font-semibold mb-2">AI Insights</h3>
           <p className="text-gray-600 dark:text-gray-400">
-            Get instant answers from your archive with AI-generated summaries and citations
+            Get instant answers with AI-generated summaries and citations (coming soon)
           </p>
         </div>
       </div>

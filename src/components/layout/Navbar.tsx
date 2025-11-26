@@ -2,7 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { Archive, Upload, Search, User, LogOut } from "lucide-react";
+import { Archive, Upload, Search, User, LogOut, Grid, FileText } from "lucide-react";
 
 export function Navbar() {
   const { data: session, status } = useSession();
@@ -21,11 +21,25 @@ export function Navbar() {
           {status === "authenticated" && session ? (
             <>
               <Link
+                href="/browse"
+                className="flex items-center gap-2 hover:text-blue-600 transition"
+              >
+                <Grid className="w-4 h-4" />
+                <span>Browse</span>
+              </Link>
+              <Link
                 href="/upload"
                 className="flex items-center gap-2 hover:text-blue-600 transition"
               >
                 <Upload className="w-4 h-4" />
                 <span>Upload</span>
+              </Link>
+              <Link
+                href="/wiki/new"
+                className="flex items-center gap-2 hover:text-orange-600 transition"
+              >
+                <FileText className="w-4 h-4" />
+                <span>New Wiki</span>
               </Link>
               <Link
                 href="/search"
