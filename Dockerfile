@@ -30,13 +30,12 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Install su-exec for user switching in entrypoint
+RUN apk add --no-cache su-exec
+
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-
-# Create directories for file storage
-RUN mkdir -p /app/data/uploads
-RUN chown -R nextjs:nodejs /app/data
 
 # Copy built application
 COPY --from=builder /app/public ./public
@@ -49,12 +48,18 @@ COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder --chown=nextjs:nodejs /app/src/lib/db ./src/lib/db
 
-USER nextjs
+# Copy and set permissions for entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# NOTE: We stay as root user here and let the entrypoint script switch to nextjs
+# This allows the entrypoint to fix volume mount permissions
 
 EXPOSE 3000
 
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Start the application
+# Use entrypoint to fix permissions before starting app
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
