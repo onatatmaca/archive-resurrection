@@ -4,7 +4,7 @@ import { pgTable, text, timestamp, uuid, jsonb, vector, index, pgEnum } from 'dr
 export const itemTypeEnum = pgEnum('item_type', ['document', 'photo', 'text', 'archive', 'other']);
 
 // Users table (managed by NextAuth)
-export const users = pgTable('users', {
+export const users = pgTable('user', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name'),
   email: text('email').notNull().unique(),
@@ -14,7 +14,7 @@ export const users = pgTable('users', {
 });
 
 // Accounts table (for NextAuth OAuth)
-export const accounts = pgTable('accounts', {
+export const accounts = pgTable('account', {
   id: uuid('id').defaultRandom().primaryKey(),
   userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
   type: text('type').notNull(),
@@ -30,7 +30,7 @@ export const accounts = pgTable('accounts', {
 });
 
 // Sessions table (for NextAuth)
-export const sessions = pgTable('sessions', {
+export const sessions = pgTable('session', {
   id: uuid('id').defaultRandom().primaryKey(),
   sessionToken: text('session_token').notNull().unique(),
   userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
