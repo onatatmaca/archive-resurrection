@@ -1,7 +1,8 @@
 import { pgTable, text, timestamp, uuid, jsonb, vector, index, pgEnum, integer } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 // Enums
-export const itemTypeEnum = pgEnum('item_type', ['document', 'photo', 'text', 'archive', 'other']);
+export const itemTypeEnum = pgEnum('item_type', ['document', 'photo', 'text', 'archive', 'wiki_page', 'other']);
 
 // Users table (managed by NextAuth)
 export const users = pgTable('user', {
@@ -50,6 +51,7 @@ export const archiveItems = pgTable('archive_items', {
 
   // Content and metadata
   contentText: text('content_text'), // Extracted text for search (Phase 2.2)
+  wikiContent: text('wiki_content'), // Markdown/rich text content for wiki pages (Phase 1.6)
   tags: jsonb('tags').$type<string[]>().default([]).notNull(), // Array of tag strings (Phase 1.5)
   metadata: jsonb('metadata').$type<Record<string, any>>().default({}).notNull(), // Flexible metadata
 
@@ -83,6 +85,18 @@ export const tags = pgTable('tags', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   usageCount: text('usage_count').default('0'), // Track how many items use this tag
 });
+
+// Relations (for Drizzle ORM queries with joins)
+export const usersRelations = relations(users, ({ many }) => ({
+  archiveItems: many(archiveItems),
+}));
+
+export const archiveItemsRelations = relations(archiveItems, ({ one }) => ({
+  uploader: one(users, {
+    fields: [archiveItems.uploaderId],
+    references: [users.id],
+  }),
+}));
 
 // Type exports for TypeScript
 export type User = typeof users.$inferSelect;
