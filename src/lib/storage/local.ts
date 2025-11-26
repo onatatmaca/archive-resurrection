@@ -5,7 +5,8 @@ import { pipeline } from 'stream/promises';
 import { Readable } from 'stream';
 
 // Storage directory - can be overridden by environment variable
-const STORAGE_DIR = process.env.STORAGE_PATH || '/app/data/uploads';
+// Default to public/uploads for development (accessible via Next.js static files)
+const STORAGE_DIR = process.env.STORAGE_PATH || path.join(process.cwd(), 'public', 'uploads');
 const PUBLIC_URL_BASE = process.env.PUBLIC_URL || 'http://localhost:3000';
 
 /**
