@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, jsonb, vector, index, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid, jsonb, vector, index, pgEnum, integer } from 'drizzle-orm/pg-core';
 
 // Enums
 export const itemTypeEnum = pgEnum('item_type', ['document', 'photo', 'text', 'archive', 'other']);
@@ -22,7 +22,7 @@ export const accounts = pgTable('account', {
   providerAccountId: text('providerAccountId').notNull(),
   refresh_token: text('refresh_token'),
   access_token: text('access_token'),
-  expires_at: timestamp('expires_at'),
+  expires_at: integer('expires_at'), // Unix timestamp in seconds
   token_type: text('token_type'),
   scope: text('scope'),
   id_token: text('id_token'),
