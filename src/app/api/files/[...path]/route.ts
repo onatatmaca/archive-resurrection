@@ -49,8 +49,11 @@ export async function GET(
 
     const mimeType = mimeTypes[ext || ''] || 'application/octet-stream';
 
+    // Convert Buffer to Uint8Array for NextResponse
+    const uint8Array = new Uint8Array(fileBuffer);
+
     // Return file with appropriate headers
-    return new NextResponse(fileBuffer, {
+    return new NextResponse(uint8Array, {
       headers: {
         'Content-Type': mimeType,
         'Content-Length': fileStats.size.toString(),
