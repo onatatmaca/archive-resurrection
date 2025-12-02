@@ -100,7 +100,7 @@ export async function PATCH(
 
     // Parse request body
     const body = await request.json();
-    const { title, description, tags, wikiContent } = body;
+    const { title, description, tags } = body;
 
     // Update the item
     const [updatedItem] = await db.update(archiveItems)
@@ -108,7 +108,6 @@ export async function PATCH(
         title: title || item.title,
         description: description !== undefined ? description : item.description,
         tags: tags || item.tags,
-        wikiContent: wikiContent !== undefined ? wikiContent : item.wikiContent,
         updatedAt: new Date(),
       })
       .where(eq(archiveItems.id, params.id))
