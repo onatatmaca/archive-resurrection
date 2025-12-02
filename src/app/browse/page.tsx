@@ -75,8 +75,10 @@ export default function BrowsePage() {
         return <Image className="w-6 h-6 text-green-600" />;
       case 'archive':
         return <Archive className="w-6 h-6 text-purple-600" />;
-      case 'wiki_page':
-        return <FileText className="w-6 h-6 text-orange-600" />;
+      case 'video':
+        return <FileText className="w-6 h-6 text-red-600" />;
+      case 'audio':
+        return <FileText className="w-6 h-6 text-yellow-600" />;
       default:
         return <File className="w-6 h-6 text-gray-600" />;
     }
@@ -121,9 +123,10 @@ export default function BrowsePage() {
           <option value="all">All Types</option>
           <option value="document">Documents</option>
           <option value="photo">Photos</option>
+          <option value="video">Videos</option>
+          <option value="audio">Audio</option>
           <option value="text">Text Files</option>
           <option value="archive">Archives</option>
-          <option value="wiki_page">Wiki Pages</option>
           <option value="other">Other</option>
         </select>
       </div>

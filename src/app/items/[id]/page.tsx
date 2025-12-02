@@ -17,7 +17,6 @@ interface ArchiveItem {
   fileSize: string | null;
   mimeType: string | null;
   contentText: string | null;
-  wikiContent: string | null;
   tags: string[];
   createdAt: string;
   updatedAt: string;
@@ -39,7 +38,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const [editTags, setEditTags] = useState<string[]>([]);
-  const [editWikiContent, setEditWikiContent] = useState('');
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -59,7 +57,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
         setEditTitle(data.item.title);
         setEditDescription(data.item.description || '');
         setEditTags(data.item.tags);
-        setEditWikiContent(data.item.wikiContent || '');
       } else {
         console.error('Item not found');
       }
@@ -82,7 +79,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
           title: editTitle,
           description: editDescription,
           tags: editTags,
-          wikiContent: editWikiContent,
         }),
       });
 
@@ -139,14 +135,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
 
   const renderPreview = () => {
     if (!item) return null;
-
-    if (item.type === 'wiki_page') {
-      return (
-        <div className="prose dark:prose-invert max-w-none">
-          <div className="whitespace-pre-wrap">{item.wikiContent}</div>
-        </div>
-      );
-    }
 
     if (item.type === 'photo' && item.fileUrl) {
       return (
@@ -238,17 +226,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
               placeholder="Description"
               className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900"
             />
-            {item.type === 'wiki_page' && (
-              <div>
-                <label className="block text-sm font-medium mb-2">Wiki Content</label>
-                <textarea
-                  value={editWikiContent}
-                  onChange={(e) => setEditWikiContent(e.target.value)}
-                  rows={15}
-                  className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 font-mono text-sm"
-                />
-              </div>
-            )}
             <div>
               <label className="block text-sm font-medium mb-2">Tags</label>
               <TagInput tags={editTags} onChange={setEditTags} />
@@ -267,7 +244,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                   setEditTitle(item.title);
                   setEditDescription(item.description || '');
                   setEditTags(item.tags);
-                  setEditWikiContent(item.wikiContent || '');
                 }}
                 className="px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
               >
