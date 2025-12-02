@@ -133,16 +133,16 @@ export async function POST(request: NextRequest) {
 
         if (existingTag) {
           // Increment usage count
-          const currentCount = parseInt(existingTag.usageCount || '0', 10);
+          const currentCount = existingTag.usageCount || 0;
           await db.update(tags)
-            .set({ usageCount: (currentCount + 1).toString() })
+            .set({ usageCount: currentCount + 1 })
             .where(eq(tags.id, existingTag.id));
         } else {
           // Create new tag
           await db.insert(tags).values({
             name: tagName,
             slug,
-            usageCount: '1',
+            usageCount: 1,
           });
         }
       }
