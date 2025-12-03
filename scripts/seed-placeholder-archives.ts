@@ -52,16 +52,16 @@ const archiveTemplates = [
 
 // Additional varied templates
 const additionalTemplates = [
-  { title: 'Imperial Russian Postcard', type: 'photo' as const, description: 'Pre-revolution postcard from St. Petersburg', year: 1913 },
-  { title: 'Ottoman Empire Map', type: 'document' as const, description: 'Historical map of Ottoman territories', year: 1914 },
-  { title: 'Spanish Flu Quarantine Notice', type: 'document' as const, description: 'Public health notice during 1918 pandemic', year: 1918 },
-  { title: 'League of Nations Document', type: 'document' as const, description: 'Official correspondence from the League', year: 1928 },
-  { title: 'Lindbergh Transatlantic Flight Photo', type: 'photo' as const, description: 'Celebration of first solo Atlantic crossing', year: 1927 },
-  { title: 'Berlin Olympics Program', type: 'document' as const, description: 'Official program from the 1936 Olympics', year: 1936 },
-  { title: 'Pearl Harbor Attack Report', type: 'document' as const, description: 'Military incident report from December 7, 1941', year: 1941 },
-  { title: 'War Production Poster', type: 'photo' as const, description: 'Industrial mobilization propaganda', year: 1942 },
-  { title: 'Blitz Damage Photograph', type: 'photo' as const, description: 'London after German bombing raid', year: 1940 },
-  { title: 'Manhattan Project Memo', type: 'document' as const, description: 'Declassified communication about atomic research', year: 1943 },
+  { title: 'Imperial Russian Postcard', type: 'photo' as const, description: 'Pre-revolution postcard from St. Petersburg', year: 1913, tags: ['russia', 'imperial', 'history'], subject: 'Culture', era: 'Edwardian Era', sourceType: 'Personal', sensitivity: 'Public' },
+  { title: 'Ottoman Empire Map', type: 'document' as const, description: 'Historical map of Ottoman territories', year: 1914, tags: ['ottoman', 'map', 'history'], subject: 'Geography', era: 'World War I', sourceType: 'Government', sensitivity: 'Public' },
+  { title: 'Spanish Flu Quarantine Notice', type: 'document' as const, description: 'Public health notice during 1918 pandemic', year: 1918, tags: ['pandemic', 'health', 'quarantine'], subject: 'Society', era: 'World War I', sourceType: 'Government', sensitivity: 'Public' },
+  { title: 'League of Nations Document', type: 'document' as const, description: 'Official correspondence from the League', year: 1928, tags: ['diplomacy', 'international', 'peace'], subject: 'Politics', era: 'Interwar Period', sourceType: 'Government', sensitivity: 'Public' },
+  { title: 'Lindbergh Transatlantic Flight Photo', type: 'photo' as const, description: 'Celebration of first solo Atlantic crossing', year: 1927, tags: ['aviation', 'lindbergh', 'achievement'], subject: 'Technology', era: 'Interwar Period', sourceType: 'Media', sensitivity: 'Public' },
+  { title: 'Berlin Olympics Program', type: 'document' as const, description: 'Official program from the 1936 Olympics', year: 1936, tags: ['olympics', 'sports', 'berlin'], subject: 'Culture', era: 'Interwar Period', sourceType: 'Government', sensitivity: 'Sensitive' },
+  { title: 'Pearl Harbor Attack Report', type: 'document' as const, description: 'Military incident report from December 7, 1941', year: 1941, tags: ['wwii', 'pearl-harbor', 'military'], subject: 'Military', era: 'World War II', sourceType: 'Military', sensitivity: 'Sensitive' },
+  { title: 'War Production Poster', type: 'photo' as const, description: 'Industrial mobilization propaganda', year: 1942, tags: ['wwii', 'production', 'propaganda'], subject: 'Economics', era: 'World War II', sourceType: 'Government', sensitivity: 'Public' },
+  { title: 'Blitz Damage Photograph', type: 'photo' as const, description: 'London after German bombing raid', year: 1940, tags: ['wwii', 'blitz', 'london'], subject: 'Military', era: 'World War II', sourceType: 'Media', sensitivity: 'Public' },
+  { title: 'Manhattan Project Memo', type: 'document' as const, description: 'Declassified communication about atomic research', year: 1943, tags: ['wwii', 'atomic', 'science'], subject: 'Technology', era: 'World War II', sourceType: 'Military', sensitivity: 'Sensitive' },
 ];
 
 async function seedPlaceholderArchives() {
