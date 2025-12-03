@@ -70,17 +70,17 @@ export default function BrowsePage() {
   const getIcon = (type: string) => {
     switch (type) {
       case 'document':
-        return <FileText className="w-6 h-6 text-blue-600" />;
+        return <FileText className="w-5 h-5 text-blue-600" />;
       case 'photo':
-        return <Image className="w-6 h-6 text-green-600" />;
+        return <Image className="w-5 h-5 text-green-600" />;
       case 'archive':
-        return <Archive className="w-6 h-6 text-purple-600" />;
+        return <Archive className="w-5 h-5 text-purple-600" />;
       case 'video':
-        return <FileText className="w-6 h-6 text-red-600" />;
+        return <FileText className="w-5 h-5 text-red-600" />;
       case 'audio':
-        return <FileText className="w-6 h-6 text-yellow-600" />;
+        return <FileText className="w-5 h-5 text-yellow-600" />;
       default:
-        return <File className="w-6 h-6 text-gray-600" />;
+        return <File className="w-5 h-5 text-gray-600" />;
     }
   };
 
@@ -90,12 +90,12 @@ export default function BrowsePage() {
         <img
           src={item.fileUrl}
           alt={item.title}
-          className="w-full h-48 object-cover"
+          className="w-full h-32 object-cover"
         />
       );
     }
     return (
-      <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+      <div className="w-full h-32 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
         {getIcon(item.type)}
       </div>
     );
@@ -103,22 +103,22 @@ export default function BrowsePage() {
 
   if (!session) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
-        <p>Please sign in to browse the archive.</p>
+      <div className="container mx-auto px-4 py-6 text-center">
+        <p className="text-sm">Please sign in to browse the archive.</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Browse Archive</h1>
+    <div className="container mx-auto px-4 py-6">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Browse Archive</h1>
 
         {/* Filter by Type */}
         <select
           value={filterType}
           onChange={(e) => setFilterType(e.target.value)}
-          className="px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900"
+          className="px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-900"
         >
           <option value="all">All Types</option>
           <option value="document">Documents</option>
@@ -133,15 +133,15 @@ export default function BrowsePage() {
 
       {/* Loading State */}
       {loading ? (
-        <div className="flex justify-center items-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <div className="flex justify-center items-center py-12">
+          <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
         </div>
       ) : items.length === 0 ? (
-        <div className="text-center py-20 border rounded-lg dark:border-gray-700">
-          <p className="text-gray-500 mb-4">No items found</p>
+        <div className="text-center py-12 border rounded-lg dark:border-gray-700">
+          <p className="text-sm text-gray-500 mb-3">No items found</p>
           <Link
             href="/upload"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition inline-block"
+            className="bg-blue-600 text-white px-4 py-1.5 text-sm rounded-lg hover:bg-blue-700 transition inline-block"
           >
             Upload your first item
           </Link>
@@ -149,7 +149,7 @@ export default function BrowsePage() {
       ) : (
         <>
           {/* Items Grid */}
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
             {items.map((item) => (
               <Link
                 key={item.id}
@@ -157,29 +157,29 @@ export default function BrowsePage() {
                 className="border rounded-lg overflow-hidden hover:shadow-lg transition dark:border-gray-700"
               >
                 {getThumbnail(item)}
-                <div className="p-4">
-                  <h3 className="font-semibold mb-2 line-clamp-2">{item.title}</h3>
+                <div className="p-2.5">
+                  <h3 className="text-sm font-semibold mb-1 line-clamp-2">{item.title}</h3>
                   {item.description && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 mb-2">
                       {item.description}
                     </p>
                   )}
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {item.tags.slice(0, 3).map((tag, idx) => (
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {item.tags.slice(0, 2).map((tag, idx) => (
                       <span
                         key={idx}
-                        className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded"
+                        className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded"
                       >
                         {tag}
                       </span>
                     ))}
-                    {item.tags.length > 3 && (
-                      <span className="text-xs px-2 py-1 text-gray-500">
-                        +{item.tags.length - 3}
+                    {item.tags.length > 2 && (
+                      <span className="text-[10px] px-1.5 py-0.5 text-gray-500">
+                        +{item.tags.length - 2}
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-[10px] text-gray-500">
                     {formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true })}
                   </p>
                 </div>
@@ -189,23 +189,23 @@ export default function BrowsePage() {
 
           {/* Pagination */}
           {pagination.totalPages > 1 && (
-            <div className="flex justify-center items-center gap-4 mt-8">
+            <div className="flex justify-center items-center gap-3 mt-4">
               <button
                 onClick={() => fetchItems(pagination.page - 1, filterType)}
                 disabled={pagination.page === 1}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-700"
+                className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-700"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="text-sm">
+              <span className="text-xs">
                 Page {pagination.page} of {pagination.totalPages}
               </span>
               <button
                 onClick={() => fetchItems(pagination.page + 1, filterType)}
                 disabled={pagination.page === pagination.totalPages}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-700"
+                className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-700"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           )}
