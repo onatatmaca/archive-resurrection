@@ -198,23 +198,31 @@
 
 ## 🚧 Phase 1: Ingestion Engine (IN PROGRESS)
 
-**Status:** 🚧 **STARTING**
+**Status:** 🚧 **50% COMPLETE** (1.1 done, 1.2 and 1.3 remaining)
 **Start Date:** December 3, 2025
+**Last Updated:** December 3, 2025
 **Goal:** AI-assisted upload process with strict metadata validation
 
 ### Tasks:
 
-#### ⬜ 1.1 One-Shot AI Pipeline
-- **Status:** Not Started
-- **Files to Modify:** `src/app/api/upload/route.ts`, `src/lib/ai/gemini.ts`
-- **Requirements:**
-  - Integrate Gemini 1.5 Pro on file upload
-  - OCR/Transcribe: Extract text from PDF/Image/Audio
-  - Auto-Tag: Generate soft tags from content
-  - Auto-Suggest Facets: Recommend hard facets based on content
-  - Auto-Translate: Generate English translation draft
-  - Calculate SHA-256 hash on upload
-  - Store all outputs immediately (no re-processing)
+#### ✅ 1.1 One-Shot AI Pipeline
+- **Status:** ✅ **COMPLETE**
+- **Completion Date:** December 3, 2025
+- **Commit:** `5a35e23`
+- **Files Modified:** `src/app/api/upload/route.ts`, `src/lib/ai/gemini.ts`, `src/lib/utils/file-processor.ts`
+- **Implemented Features:**
+  - ✅ Gemini 1.5 Pro integration for multimodal content
+  - ✅ OCR: Gemini Vision extracts text from images
+  - ✅ Auto-Tag: AI generates 3-5 relevant tags from content
+  - ✅ Auto-Suggest Facets: AI recommends era, location, subject, source type, language, sensitivity
+  - ✅ Auto-Translate: Generates English translation if document is in another language
+  - ✅ SHA-256 hash calculation with duplicate detection
+  - ✅ "Pay Once, Use Forever": All AI results stored in metadata (no re-processing)
+  - ✅ Audio/Video file type support (up to 500MB for video)
+  - ✅ Fuzzy date integration (exact dates + time periods)
+  - ✅ Translation record creation (stored as 'draft' status)
+  - ✅ Facet association creation
+  - ✅ Moderation controls (unpublished by default, sensitive content flagging)
 
 #### ⬜ 1.2 Strict Upload UI
 - **Status:** Not Started
