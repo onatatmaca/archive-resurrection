@@ -29,11 +29,11 @@
 
 ## 📊 Current Status
 
-**Active Phase:** Phase 1 - Ingestion Engine (✅ COMPLETE!)
-**Last Completed:** Phase 1.3 - Media Processing
+**Active Phase:** Phase 3 - Time Stream (Planning)
+**Last Completed:** Phase 2 - Universal Viewer
 **Last Updated:** December 3, 2025
 **Current Branch:** `claude/phase-1-2-implementation-01UuHzePmJXYUQTQGRLrwgc5`
-**Latest Session:** Phase 1.3 Implementation
+**Latest Session:** Phase 2 Implementation
 
 ### 🚨 CURRENT BLOCKER - Database Migration Needed
 
@@ -253,7 +253,7 @@ Error uploading file: column "preferred_language" does not exist
   - ✅ Comprehensive validation before upload
 
 #### 1.3 Media Processing ✅
-- **Commit:** `TBD` (current session)
+- **Commit:** `8c69f57`
 - **Date:** December 3, 2025
 - **Files:**
   - `src/lib/utils/media-processor.ts` - Media processing utilities
@@ -271,16 +271,103 @@ Error uploading file: column "preferred_language" does not exist
   - Full video/audio processing requires ffmpeg installation in Docker
   - Image processing fully functional using sharp library
   - Thumbnails and previews automatically uploaded to storage
+- **⚠️ FUTURE WORK - Video/Audio Processing:**
+  - **TODO:** Install ffmpeg in Dockerfile
+    - Add to Dockerfile: `RUN apk add --no-cache ffmpeg`
+    - Increases Docker image size by ~100MB
+  - **TODO:** Implement video thumbnail extraction
+    - Uncomment TODO sections in `processVideo()` function
+    - Use fluent-ffmpeg to extract frame at 1 second
+    - Generate 300x300 thumbnail from extracted frame
+  - **TODO:** Implement audio waveform generation
+    - Install audiowaveform or use ffmpeg
+    - Generate waveform JSON data or PNG visualization
+    - Upload waveform to storage and save URL
+  - **TODO:** Extract video/audio metadata
+    - Duration, codec, bitrate, resolution (video)
+    - Sample rate, channels, bitrate (audio)
+    - Store in metadata field
+  - **Implementation Guide:** See comments in `src/lib/utils/media-processor.ts`
 
 ---
 
-## 📋 Phase 2-5: Future Phases (PLANNED)
+## ✅ Phase 2: Universal Viewer (100% COMPLETE)
 
-### Phase 2: Universal Viewer
-- Split-pane document viewer
-- Translation selector
-- Citation generator
-- Collaborative translation
+**Status:** ✅ Complete
+**Started:** December 3, 2025
+**Completed:** December 3, 2025
+
+### Completed:
+
+#### 2.1 Translation Management System ✅
+- **Commit:** `TBD` (current session)
+- **Files:**
+  - `src/app/api/items/[id]/translations/route.ts` - Translation CRUD API
+  - `src/app/api/translations/[id]/vote/route.ts` - Translation voting API
+- **Features:**
+  - ✅ Fetch all translations for an item
+  - ✅ Create new translations (human-authored)
+  - ✅ Community voting system (upvotes/downvotes)
+  - ✅ Translation status workflow (draft → pending → approved)
+  - ✅ Author attribution (human vs AI)
+  - ✅ Duplicate prevention (one translation per language per user)
+
+#### 2.2 Citation Generator ✅
+- **Commit:** `TBD` (current session)
+- **File:** `src/lib/utils/citation-generator.ts`
+- **Features:**
+  - ✅ APA 7th Edition format
+  - ✅ MLA 9th Edition format
+  - ✅ Chicago 17th Edition format
+  - ✅ BibTeX format for LaTeX
+  - ✅ Plain text format
+  - ✅ One-click copy to clipboard
+  - ✅ Automatic access date generation
+  - ✅ Flexible data structure for all formats
+
+#### 2.3 Split-Pane Document Viewer ✅
+- **Commit:** `TBD` (current session)
+- **File:** `src/app/items/[id]/page.tsx`
+- **Features:**
+  - ✅ Side-by-side original + translation view
+  - ✅ Single view mode (toggle)
+  - ✅ Responsive grid layout
+  - ✅ Synchronized scrolling support
+  - ✅ Visual separation with clear labels
+
+#### 2.4 Translation Selector ✅
+- **Commit:** `TBD` (current session)
+- **File:** `src/app/items/[id]/page.tsx`
+- **Features:**
+  - ✅ Dropdown language selector
+  - ✅ Shows vote counts for each translation
+  - ✅ "Original" option to view source content
+  - ✅ Automatic view switching
+  - ✅ Integration with split-pane toggle
+
+#### 2.5 Collaborative Translation UI ✅
+- **Commit:** `TBD` (current session)
+- **File:** `src/app/items/[id]/page.tsx`
+- **Features:**
+  - ✅ Add translation form
+    - Language code input
+    - Optional translated title
+    - Optional translated description
+    - Required translated content
+  - ✅ Translation list with metadata
+    - Author name and type (human/AI)
+    - Vote counts (upvotes/downvotes)
+    - Quick view button
+  - ✅ Voting system UI
+    - Thumbs up/down buttons
+    - Real-time vote count updates
+    - Visual feedback on hover
+  - ✅ Translation moderation status display
+  - ✅ Community-driven quality control
+
+---
+
+## 📋 Phase 3-5: Future Phases (PLANNED)
 
 ### Phase 3: Time Stream
 - Vertical timeline visualization
@@ -407,16 +494,18 @@ git push -u origin branch-name
 ## 📊 Statistics
 
 **Total Phases:** 5 (0-4)
-**Phases Complete:** 2 (Phase 0 ✅, Phase 1 ✅)
-**Current Phase:** 2 - Universal Viewer
-**Total Commits:** 42+
+**Phases Complete:** 3 (Phase 0 ✅, Phase 1 ✅, Phase 2 ✅)
+**Current Phase:** 3 - Time Stream (Planning)
+**Total Commits:** 45+
 **Database Tables:** 12
 **Default Facets:** 70+
 **Media Processing:** Images (full support), Video/Audio (placeholders)
+**Citation Formats:** 5 (APA, MLA, Chicago, BibTeX, Plain Text)
+**Translation System:** Full community collaboration with voting
 
 ---
 
 **Last Updated:** December 3, 2025 by Claude
-**Current Session:** Phase 1.3 Implementation - Media Processing
-**Next Session:** Phase 2 - Universal Viewer
-**Status:** 🎉 Phase 1 Complete! Moving to Phase 2
+**Current Session:** Phase 2 Implementation - Universal Viewer
+**Next Session:** Phase 3 - Time Stream
+**Status:** 🎉 Phase 2 Complete! Moving to Phase 3
