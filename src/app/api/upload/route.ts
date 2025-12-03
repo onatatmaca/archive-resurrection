@@ -7,7 +7,7 @@ import {
   tags,
   archiveDates,
   facets,
-  itemFacets,
+  archiveItemFacets,
   translations,
 } from '@/lib/db/schema';
 import { uploadFile } from '@/lib/storage';
@@ -310,7 +310,7 @@ export async function POST(request: NextRequest) {
         });
 
         if (facet) {
-          await db.insert(itemFacets).values({
+          await db.insert(archiveItemFacets).values({
             itemId: newItem.id,
             facetId: facet.id,
           });
