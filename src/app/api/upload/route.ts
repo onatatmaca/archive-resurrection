@@ -12,6 +12,7 @@ import {
 } from '@/lib/db/schema';
 import { uploadFile } from '@/lib/storage';
 import { extractTextFromFile, calculateFileHash } from '@/lib/utils/file-processor';
+import { processMedia } from '@/lib/utils/media-processor';
 import { generateTags, suggestFacets, generateTranslation } from '@/lib/ai/gemini';
 import { eq, and } from 'drizzle-orm';
 
@@ -158,6 +159,16 @@ export async function POST(request: NextRequest) {
     // Upload file to storage
     const fileUrl = await uploadFile(fileBuffer, file.name, file.type);
 
+    // PHASE 1.3: Media Processing - Generate thumbnails, previews, waveforms
+    let mediaProcessingResult = {};
+    try {
+      mediaProcessingResult = await processMedia(fileBuffer, file.name, file.type);
+      console.log('Media processing completed:', mediaProcessingResult);
+    } catch (error) {
+      console.error('Error processing media:', error);
+      // Continue even if media processing fails
+    }
+
     // PHASE 1.1: Extract text content from file (with OCR for images)
     let contentText = '';
     try {
@@ -245,6 +256,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         aiSuggestedFacets: aiSuggestedFacets || {},
         aiGeneratedTags: aiGeneratedTags,
+        mediaProcessing: mediaProcessingResult, // PHASE 1.3: Thumbnails, previews, metadata
       },
       sha256Hash,
       originalLanguage,
