@@ -29,11 +29,11 @@
 
 ## 📊 Current Status
 
-**Active Phase:** Database Migration Required
-**Issue:** Missing Phase 0 columns in production database
+**Active Phase:** Phase 1 - Ingestion Engine (75% Complete)
+**Last Completed:** Phase 1.2 - Strict Upload UI
 **Last Updated:** December 3, 2025
-**Current Branch:** `claude/fix-archive-resurrection-01576oACG6gXHRApQAJvZHAa`
-**Latest Commit:** `72f97c1` - Fix: Add database migration script
+**Current Branch:** `claude/phase-1-2-implementation-01UuHzePmJXYUQTQGRLrwgc5`
+**Latest Session:** Phase 1.2 Implementation
 
 ### 🚨 CURRENT BLOCKER - Database Migration Needed
 
@@ -234,16 +234,24 @@ Error uploading file: column "preferred_language" does not exist
   - Audio/video support (up to 500MB)
   - All AI results stored in metadata (pay once, use forever)
 
-### Remaining:
+#### 1.2 Strict Upload UI ✅
+- **Commit:** `TBD` (current session)
+- **Date:** December 3, 2025
+- **Files:**
+  - `src/app/upload/page.tsx` - Enhanced upload form
+  - `src/app/api/facets/route.ts` - Facets API endpoint
+- **Features:**
+  - ✅ Facet dropdowns (all 6 categories with source_type and sensitivity required)
+  - ✅ Date picker with exact vs period toggle
+  - ✅ AI processing toggle with cost estimate display
+  - ✅ SHA-256 client-side verification using Web Crypto API
+  - ✅ File integrity display with visual verification
+  - ✅ Enhanced UI with categorized sections
+  - ✅ Real-time file hash calculation
+  - ✅ Support for audio/video files
+  - ✅ Comprehensive validation before upload
 
-#### 1.2 Strict Upload UI ⬜
-- **File:** `src/app/upload/page.tsx`
-- **TODO:**
-  - Facet dropdowns (source_type and sensitivity required)
-  - Date picker (exact vs period toggle)
-  - AI processing toggle with cost estimate
-  - SHA-256 client-side verification
-  - File integrity display
+### Remaining:
 
 #### 1.3 Media Processing ⬜
 - **File:** `src/lib/utils/media-processor.ts`
@@ -375,10 +383,13 @@ git push -u origin branch-name
 
 ## 🎯 Next Immediate Steps
 
-1. **URGENT:** Fix missing database columns (see Current Status)
-2. **After Fix:** Test upload and browse functionality
-3. **Then:** Continue Phase 1.2 (Strict Upload UI)
-4. **Then:** Complete Phase 1.3 (Media Processing)
+1. **Current:** Complete Phase 1.3 (Media Processing)
+   - Implement ffmpeg integration for video/audio processing
+   - Add thumbnail extraction
+   - Create preview generation
+2. **After Phase 1:** Begin Phase 2 (Universal Viewer)
+3. **Deployment:** Test Phase 1.2 upload UI on TrueNAS server
+4. **Optional:** Address database migration blocker if still present
 
 ---
 
@@ -386,7 +397,7 @@ git push -u origin branch-name
 
 **Total Phases:** 5 (0-4)
 **Phases Complete:** 1 (Phase 0)
-**Current Phase:** 1 (50% complete)
+**Current Phase:** 1 (75% complete - 1.1 ✅, 1.2 ✅, 1.3 pending)
 **Total Commits:** 40+
 **Database Tables:** 12
 **Default Facets:** 70+
@@ -394,5 +405,5 @@ git push -u origin branch-name
 ---
 
 **Last Updated:** December 3, 2025 by Claude
-**Current Session:** Database Migration Fix
-**Next Session:** Continue after database is fixed
+**Current Session:** Phase 1.2 Implementation - Strict Upload UI
+**Next Session:** Phase 1.3 - Media Processing
