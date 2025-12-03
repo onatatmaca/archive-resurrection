@@ -134,15 +134,15 @@ async function seedPlaceholderArchives() {
         uploaderId: systemUser.id,
       }).returning();
 
-      // Create fuzzy date
-      const startDate = new Date(archive.year, 0, 1);
-      const endDate = new Date(archive.year, 11, 31);
+      // Create fuzzy date (using ISO date strings YYYY-MM-DD)
+      const startDateStr = `${archive.year}-01-01`;
+      const endDateStr = `${archive.year}-12-31`;
       const isApproximate = Math.random() > 0.6; // 40% exact, 60% fuzzy
 
       await db.insert(archiveDates).values({
         itemId: newItem.id,
-        dateStart: startDate,
-        dateEnd: endDate,
+        dateStart: startDateStr,
+        dateEnd: endDateStr,
         displayDate: isApproximate ? `circa ${archive.year}` : `${archive.year}`,
         isApproximate,
         precision: isApproximate ? 'year' : 'day',
