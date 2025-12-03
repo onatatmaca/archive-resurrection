@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
 
     // Fetch all items with their dates
     const itemsWithDates = await db.query.archiveItems.findMany({
-      where: (items, { eq }) => eq(items.isPublished, true), // Only published items
       with: {
         uploader: {
           columns: {
