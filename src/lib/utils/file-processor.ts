@@ -1,9 +1,18 @@
 import pdf from 'pdf-parse';
 import mammoth from 'mammoth';
+import crypto from 'crypto';
+import { extractTextFromImage } from '@/lib/ai/gemini';
+
+/**
+ * PHASE 1.1: Calculate SHA-256 hash of file for data integrity
+ */
+export function calculateFileHash(fileBuffer: Buffer): string {
+  return crypto.createHash('sha256').update(fileBuffer).digest('hex');
+}
 
 /**
  * Extract text content from various file types
- * Used for Phase 2.2 (Full-Text Indexing)
+ * PHASE 1.1: Enhanced with OCR for images
  */
 export async function extractTextFromFile(
   fileBuffer: Buffer,
@@ -20,6 +29,23 @@ export async function extractTextFromFile(
 
       case 'text/plain':
         return fileBuffer.toString('utf-8');
+
+      // PHASE 1.1: Image OCR using Gemini Vision
+      case 'image/jpeg':
+      case 'image/png':
+      case 'image/gif':
+      case 'image/webp':
+        return await extractTextFromImage(fileBuffer, mimeType);
+
+      // Audio/Video: No text extraction (handled separately in Phase 1.3)
+      case 'audio/mpeg':
+      case 'audio/wav':
+      case 'audio/ogg':
+      case 'video/mp4':
+      case 'video/mpeg':
+      case 'video/quicktime':
+      case 'video/webm':
+        return '';
 
       default:
         console.warn(`Unsupported file type for text extraction: ${mimeType}`);
@@ -43,19 +69,38 @@ async function extractTextFromWord(buffer: Buffer): Promise<string> {
 
 /**
  * Validate file type and size
+ * PHASE 1.1: Added audio/video support
  */
 export function validateFile(file: File, maxSizeMB: number = 100): { valid: boolean; error?: string } {
   const allowedTypes = [
+    // Documents
     'application/pdf',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'application/msword',
     'text/plain',
+    // Images
     'image/jpeg',
     'image/png',
     'image/gif',
     'image/webp',
+    // Audio (Phase 1.1)
+    'audio/mpeg',
+    'audio/mp3',
+    'audio/wav',
+    'audio/ogg',
+    'audio/aac',
+    'audio/m4a',
+    // Video (Phase 1.1)
+    'video/mp4',
+    'video/mpeg',
+    'video/quicktime',
+    'video/webm',
+    'video/x-msvideo',
+    // Archives
     'application/zip',
     'application/x-zip-compressed',
+    'application/x-rar-compressed',
+    'application/x-7z-compressed',
   ];
 
   if (!allowedTypes.includes(file.type)) {
