@@ -1,8 +1,28 @@
 # Database Schema Reference
 
-> **⚠️ IMPORTANT FOR DEVELOPERS:**
-> This file documents the exact field names in each database table.
-> **ALWAYS** reference this before writing database operations to avoid type errors.
+> # ⚠️ CRITICAL FOR ALL AI ASSISTANTS ⚠️
+>
+> **THIS IS YOUR DATABASE FIELD REFERENCE - READ BEFORE ANY DB OPERATION**
+>
+> ### Purpose:
+> This file documents the **exact** field names for every database table.
+> Reading this prevents TypeScript errors and database query failures.
+>
+> ### Rules:
+> 1. 📖 **ALWAYS READ** this file before writing INSERT/UPDATE/SELECT queries
+> 2. ⚠️ **NEVER GUESS** field names - they're often different from what you expect
+> 3. 🔍 **CHECK EXPORT NAMES** - `archiveItemFacets` NOT `itemFacets`
+> 4. 📝 **UPDATE THIS FILE** if you add/modify schema fields
+> 5. 🚫 **NEVER CREATE NEW .md FILES** - document in PROGRESS-TRACKER.md instead
+>
+> ### Common Mistakes This Prevents:
+> - ❌ Using `content` instead of `translatedContent` in translations table
+> - ❌ Using `itemFacets` instead of `archiveItemFacets`
+> - ❌ Using string for `usageCount` (it's an integer)
+> - ❌ Using `timestamp` for `expires_at` (it's an integer)
+>
+> **📚 For progress tracking and documentation, see PROGRESS-TRACKER.md**
+> **📋 For deployment info, see docs/TRUENAS-DEPLOYMENT.md**
 
 ---
 
