@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:seed": "tsx scripts/seed-facets.ts"
+    "db:seed": "tsx scripts/seed-facets.ts",
+    "db:migrate": "sh scripts/deploy-phase0.sh"
   },
   "dependencies": {
     "next": "^14.2.0",
