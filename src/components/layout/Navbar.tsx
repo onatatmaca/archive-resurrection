@@ -9,56 +9,56 @@ export function Navbar() {
 
   return (
     <nav className="border-b dark:border-gray-800 bg-white dark:bg-gray-950">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-          <Archive className="w-6 h-6 text-blue-600" />
+        <Link href="/" className="flex items-center gap-1.5 text-lg font-bold">
+          <Archive className="w-5 h-5 text-blue-600" />
           <span>Archive Resurrection</span>
         </Link>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           {status === "authenticated" && session ? (
             <>
               <Link
                 href="/browse"
-                className="flex items-center gap-2 hover:text-blue-600 transition"
+                className="flex items-center gap-1.5 text-sm hover:text-blue-600 transition"
               >
                 <Grid className="w-4 h-4" />
                 <span>Browse</span>
               </Link>
               <Link
                 href="/upload"
-                className="flex items-center gap-2 hover:text-blue-600 transition"
+                className="flex items-center gap-1.5 text-sm hover:text-blue-600 transition"
               >
                 <Upload className="w-4 h-4" />
                 <span>Upload</span>
               </Link>
               <Link
                 href="/timeline"
-                className="flex items-center gap-2 hover:text-green-600 transition"
+                className="flex items-center gap-1.5 text-sm hover:text-green-600 transition"
               >
                 <Clock className="w-4 h-4" />
                 <span>Timeline</span>
               </Link>
               <Link
                 href="/search"
-                className="flex items-center gap-2 hover:text-purple-600 transition"
+                className="flex items-center gap-1.5 text-sm hover:text-purple-600 transition"
               >
                 <Search className="w-4 h-4" />
                 <span>Search</span>
               </Link>
 
               {/* User Menu */}
-              <div className="flex items-center gap-3 ml-4 pl-4 border-l dark:border-gray-800">
+              <div className="flex items-center gap-2 ml-3 pl-3 border-l dark:border-gray-800">
                 {session.user?.image && (
                   <img
                     src={session.user.image}
                     alt="Profile"
-                    className="w-8 h-8 rounded-full"
+                    className="w-6 h-6 rounded-full"
                   />
                 )}
-                <span className="text-sm">{session.user?.name}</span>
+                <span className="text-xs">{session.user?.name}</span>
                 <button
                   onClick={() => signOut()}
                   className="flex items-center gap-1 text-sm text-gray-600 hover:text-red-600 transition"

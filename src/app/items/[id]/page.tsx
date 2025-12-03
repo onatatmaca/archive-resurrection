@@ -333,7 +333,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
 
   if (!session) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
+      <div className="container mx-auto px-4 py-6 text-center">
         <p>Please sign in to view this item.</p>
       </div>
     );
@@ -341,7 +341,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-12 flex justify-center">
+      <div className="container mx-auto px-4 py-6 flex justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
@@ -349,7 +349,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
 
   if (!item) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
+      <div className="container mx-auto px-4 py-6 text-center">
         <p>Item not found</p>
       </div>
     );
@@ -359,26 +359,26 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
   const selectedTranslation = getSelectedTranslation();
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-7xl">
+    <div className="container mx-auto px-4 py-6 max-w-7xl">
       {/* Header with Translation Controls */}
-      <div className="mb-8">
-        <div className="flex justify-between items-start mb-6">
+      <div className="mb-4">
+        <div className="flex justify-between items-start mb-3">
           <div className="flex-1">
             {editing ? (
               <input
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full text-3xl font-bold px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900"
+                className="w-full text-3xl font-bold px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-900"
               />
             ) : (
-              <h1 className="text-3xl font-bold mb-2">{item.title}</h1>
+              <h1 className="text-2xl font-bold mb-2">{item.title}</h1>
             )}
           </div>
 
           <div className="flex gap-2 ml-4">
             {/* Translation Selector */}
-            <div className="flex items-center gap-2 px-4 py-2 border rounded-lg dark:border-gray-700">
+            <div className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700">
               <Languages className="w-4 h-4" />
               <select
                 value={selectedLang}
@@ -398,7 +398,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
             {selectedTranslation && (
               <button
                 onClick={() => setSplitView(!splitView)}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
+                className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
               >
                 {splitView ? 'Single View' : 'Split View'}
               </button>
@@ -407,7 +407,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
             {/* Citation Button */}
             <button
               onClick={() => setShowCitation(!showCitation)}
-              className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
             >
               <BookOpen className="w-4 h-4" />
               Cite
@@ -417,7 +417,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
               <>
                 <button
                   onClick={() => setEditing(!editing)}
-                  className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -425,7 +425,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
                 <button
                   onClick={handleDelete}
                   disabled={deleting}
-                  className="flex items-center gap-2 px-4 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 disabled:opacity-50"
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-600 text-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 disabled:opacity-50"
                 >
                   <Trash2 className="w-4 h-4" />
                   {deleting ? 'Deleting...' : 'Delete'}
@@ -437,7 +437,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
 
         {/* Citation Generator */}
         {showCitation && (
-          <div className="mb-6 p-6 border rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+          <div className="mb-3 p-4 border rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
             <h3 className="text-lg font-semibold mb-4">Citation Generator</h3>
             <div className="flex gap-2 mb-4">
               {(['apa', 'mla', 'chicago', 'bibtex', 'plaintext'] as const).map(format => (
@@ -470,7 +470,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
 
         {/* Metadata */}
         {!editing && (
-          <div className="flex flex-wrap gap-6 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400">
             {item.uploader && (
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
@@ -497,7 +497,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
 
       {/* PHASE 2: Split-Pane View or Single View */}
       {splitView && selectedTranslation ? (
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-3">
           {/* Original Content */}
           <div>
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -565,7 +565,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
       )}
 
       {/* PHASE 2: Add Translation UI */}
-      <div className="mt-8 p-6 border rounded-lg dark:border-gray-700">
+      <div className="mt-8 p-4 border rounded-lg dark:border-gray-700">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">Collaborative Translations</h3>
           <button
@@ -578,21 +578,21 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
         </div>
 
         {showAddTranslation && (
-          <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg space-y-4">
+          <div className="mb-3 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <input
                 type="text"
                 placeholder="Language Code (e.g., tr, de, fr)"
                 value={newTransLang}
                 onChange={(e) => setNewTransLang(e.target.value)}
-                className="px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               />
               <input
                 type="text"
                 placeholder="Translated Title (optional)"
                 value={newTransTitle}
                 onChange={(e) => setNewTransTitle(e.target.value)}
-                className="px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               />
             </div>
             <textarea
@@ -600,14 +600,14 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
               value={newTransDesc}
               onChange={(e) => setNewTransDesc(e.target.value)}
               rows={3}
-              className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+              className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
             />
             <textarea
               placeholder="Translated Content *"
               value={newTransContent}
               onChange={(e) => setNewTransContent(e.target.value)}
               rows={6}
-              className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+              className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
             />
             <div className="flex gap-2">
               <button
@@ -619,7 +619,7 @@ export default function UniversalViewerPage({ params }: { params: { id: string }
               </button>
               <button
                 onClick={() => setShowAddTranslation(false)}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 Cancel
               </button>

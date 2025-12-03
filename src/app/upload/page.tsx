@@ -76,8 +76,8 @@ export default function UploadPage() {
 
   if (!session) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
-        <p>Please sign in to upload files.</p>
+      <div className="container mx-auto px-4 py-6 text-center">
+        <p className="text-sm">Please sign in to upload files.</p>
       </div>
     );
   }
@@ -199,18 +199,18 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-2">Upload Archive Item</h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-8">
+    <div className="container mx-auto px-4 py-6 max-w-4xl">
+      <h1 className="text-2xl font-bold mb-1">Upload Archive Item</h1>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
         Add historical documents with AI-powered metadata extraction
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* File Upload Area */}
         <div>
-          <label className="block text-sm font-medium mb-2">File *</label>
+          <label className="block text-xs font-medium mb-1.5">File *</label>
           <div
-            className={`border-2 border-dashed rounded-lg p-8 text-center transition ${
+            className={`border-2 border-dashed rounded-lg p-4 text-center transition ${
               dragActive
                 ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
                 : 'border-gray-300 dark:border-gray-700'
@@ -221,12 +221,12 @@ export default function UploadPage() {
             onDrop={handleDrop}
           >
             {file ? (
-              <div className="space-y-3">
-                <div className="flex items-center justify-center gap-3">
-                  <File className="w-8 h-8 text-blue-600" />
+              <div className="space-y-2">
+                <div className="flex items-center justify-center gap-2">
+                  <File className="w-6 h-6 text-blue-600" />
                   <div className="text-left">
-                    <p className="font-medium">{file.name}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm font-medium">{file.name}</p>
+                    <p className="text-xs text-gray-500">
                       {(file.size / 1024 / 1024).toFixed(2)} MB
                     </p>
                   </div>
@@ -236,26 +236,26 @@ export default function UploadPage() {
                       setFile(null);
                       setFileHash('');
                     }}
-                    className="ml-4 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded"
+                    className="ml-3 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
                 {/* Phase 1.2: File Integrity Display */}
                 {hashing ? (
-                  <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                  <div className="flex items-center justify-center gap-1.5 text-xs text-gray-600">
+                    <Loader2 className="w-3 h-3 animate-spin" />
                     <span>Calculating SHA-256 hash...</span>
                   </div>
                 ) : fileHash ? (
-                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3">
-                    <div className="flex items-center gap-2 mb-1">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                      <span className="text-sm font-medium text-green-700 dark:text-green-400">
+                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-2">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <CheckCircle2 className="w-3 h-3 text-green-600" />
+                      <span className="text-xs font-medium text-green-700 dark:text-green-400">
                         File Integrity Verified
                       </span>
                     </div>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 font-mono break-all">
+                    <p className="text-[10px] text-gray-600 dark:text-gray-400 font-mono break-all">
                       SHA-256: {fileHash}
                     </p>
                   </div>
@@ -263,15 +263,15 @@ export default function UploadPage() {
               </div>
             ) : (
               <>
-                <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                <p className="mb-2">Drag and drop a file here, or click to select</p>
-                <p className="text-sm text-gray-500 mb-4">
+                <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                <p className="text-sm mb-1">Drag and drop a file here, or click to select</p>
+                <p className="text-xs text-gray-500 mb-3">
                   Supported: PDF, DOCX, DOC, TXT, images, audio, video, ZIP (max 100MB)
                 </p>
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                  className="bg-blue-600 text-white px-3 py-1.5 text-sm rounded-lg hover:bg-blue-700 transition"
                 >
                   Choose File
                 </button>
@@ -289,12 +289,12 @@ export default function UploadPage() {
 
         {/* Title */}
         <div>
-          <label className="block text-sm font-medium mb-2">Title *</label>
+          <label className="block text-xs font-medium mb-1.5">Title *</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900"
+            className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-900"
             placeholder="Enter a descriptive title"
             required
           />
@@ -302,23 +302,23 @@ export default function UploadPage() {
 
         {/* Description */}
         <div>
-          <label className="block text-sm font-medium mb-2">Description</label>
+          <label className="block text-xs font-medium mb-1.5">Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
-            className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900"
+            className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-900"
             placeholder="Provide additional context about this item"
           />
         </div>
 
         {/* Type */}
         <div>
-          <label className="block text-sm font-medium mb-2">Type *</label>
+          <label className="block text-xs font-medium mb-1.5">Type *</label>
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900"
+            className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-900"
             required
           >
             <option value="document">Document</option>
@@ -341,13 +341,13 @@ export default function UploadPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Source Type - REQUIRED */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-xs font-medium mb-1.5">
                 Source Type * <span className="text-red-500">(Required)</span>
               </label>
               <select
                 value={selectedFacets.sourceType || ''}
                 onChange={(e) => setSelectedFacets({...selectedFacets, sourceType: e.target.value})}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
                 required
               >
                 <option value="">Select source type...</option>
@@ -361,13 +361,13 @@ export default function UploadPage() {
 
             {/* Sensitivity - REQUIRED */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-xs font-medium mb-1.5">
                 Sensitivity Level * <span className="text-red-500">(Required)</span>
               </label>
               <select
                 value={selectedFacets.sensitivity || ''}
                 onChange={(e) => setSelectedFacets({...selectedFacets, sensitivity: e.target.value})}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
                 required
               >
                 <option value="">Select sensitivity...</option>
@@ -381,11 +381,11 @@ export default function UploadPage() {
 
             {/* Era - Optional */}
             <div>
-              <label className="block text-sm font-medium mb-2">Era (Optional)</label>
+              <label className="block text-xs font-medium mb-1.5">Era (Optional)</label>
               <select
                 value={selectedFacets.era || ''}
                 onChange={(e) => setSelectedFacets({...selectedFacets, era: e.target.value ? [e.target.value] : []})}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <option value="">Select era...</option>
                 {facets.era?.map((facet: any) => (
@@ -398,11 +398,11 @@ export default function UploadPage() {
 
             {/* Location - Optional */}
             <div>
-              <label className="block text-sm font-medium mb-2">Location (Optional)</label>
+              <label className="block text-xs font-medium mb-1.5">Location (Optional)</label>
               <select
                 value={selectedFacets.location || ''}
                 onChange={(e) => setSelectedFacets({...selectedFacets, location: e.target.value ? [e.target.value] : []})}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <option value="">Select location...</option>
                 {facets.location?.map((facet: any) => (
@@ -415,11 +415,11 @@ export default function UploadPage() {
 
             {/* Subject - Optional */}
             <div>
-              <label className="block text-sm font-medium mb-2">Subject (Optional)</label>
+              <label className="block text-xs font-medium mb-1.5">Subject (Optional)</label>
               <select
                 value={selectedFacets.subject || ''}
                 onChange={(e) => setSelectedFacets({...selectedFacets, subject: e.target.value ? [e.target.value] : []})}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <option value="">Select subject...</option>
                 {facets.subject?.map((facet: any) => (
@@ -432,11 +432,11 @@ export default function UploadPage() {
 
             {/* Language - Optional */}
             <div>
-              <label className="block text-sm font-medium mb-2">Language (Optional)</label>
+              <label className="block text-xs font-medium mb-1.5">Language (Optional)</label>
               <select
                 value={selectedFacets.language || ''}
                 onChange={(e) => setSelectedFacets({...selectedFacets, language: e.target.value})}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <option value="">Select language...</option>
                 {facets.language?.map((facet: any) => (
@@ -487,12 +487,12 @@ export default function UploadPage() {
           {/* Exact Date Input */}
           {dateType === 'exact' && (
             <div>
-              <label className="block text-sm font-medium mb-2">Date</label>
+              <label className="block text-xs font-medium mb-1.5">Date</label>
               <input
                 type="date"
                 value={dateExact}
                 onChange={(e) => setDateExact(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
               />
             </div>
           )}
@@ -502,33 +502,33 @@ export default function UploadPage() {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Start Date</label>
+                  <label className="block text-xs font-medium mb-1.5">Start Date</label>
                   <input
                     type="date"
                     value={dateStart}
                     onChange={(e) => setDateStart(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                    className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">End Date</label>
+                  <label className="block text-xs font-medium mb-1.5">End Date</label>
                   <input
                     type="date"
                     value={dateEnd}
                     onChange={(e) => setDateEnd(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                    className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className="block text-xs font-medium mb-1.5">
                   Display Text (e.g., "Late 1990s", "Winter 1942")
                 </label>
                 <input
                   type="text"
                   value={dateDisplay}
                   onChange={(e) => setDateDisplay(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-800"
+                  className="w-full px-3 py-1.5 text-sm border rounded-lg dark:border-gray-700 dark:bg-gray-800"
                   placeholder="Enter how this date should be displayed"
                 />
               </div>
@@ -538,7 +538,7 @@ export default function UploadPage() {
 
         {/* Tags */}
         <div>
-          <label className="block text-sm font-medium mb-2">Tags (Optional)</label>
+          <label className="block text-xs font-medium mb-1.5">Tags (Optional)</label>
           <TagInput tags={tags} onChange={setTags} />
           <p className="text-xs text-gray-500 mt-1">
             Add custom tags, or let AI suggest them automatically
@@ -590,7 +590,7 @@ export default function UploadPage() {
         <button
           type="submit"
           disabled={uploading || !file}
-          className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {uploading ? (
             <>

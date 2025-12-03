@@ -29,11 +29,11 @@
 
 ## 📊 Current Status
 
-**Active Phase:** Phase 4 - Admin Panel (Planning)
-**Last Completed:** Phase 3 - Time Stream
+**Active Phase:** Phase 3.5 - Placeholder Data & UI Refinement
+**Last Completed:** Phase 3 - Time Stream + Wiki Removal
 **Last Updated:** December 3, 2025
 **Current Branch:** `claude/phase-1-2-implementation-01UuHzePmJXYUQTQGRLrwgc5`
-**Latest Session:** Phase 3 Implementation
+**Latest Session:** Timeline fixes, Wiki cleanup, Placeholder data preparation
 
 ### 🚨 CURRENT BLOCKER - Database Migration Needed
 
@@ -449,17 +449,157 @@ Error uploading file: column "preferred_language" does not exist
 
 ---
 
+## ✅ Phase 3.5: Post-Launch Fixes & Placeholder Data (IN PROGRESS)
+
+**Status:** 🔄 In Progress
+**Started:** December 3, 2025
+
+### Completed:
+
+#### 3.5.1 Wiki System Removal ✅
+- **Commit:** `717018e` - Add Timeline link to navigation bar
+- **Commit:** `4341a74` - Remove Wiki references and fix Timeline visibility
+- **Date:** December 3, 2025
+- **Files:**
+  - `src/components/layout/Navbar.tsx` - Removed "New Wiki" link, added Timeline
+  - `src/app/page.tsx` - Removed "New Wiki Page" button, added Timeline, updated feature grid
+- **Changes:**
+  - ✅ Removed all Wiki references from navigation
+  - ✅ Removed all Wiki references from homepage
+  - ✅ Added Timeline link to navbar (Clock icon, green hover)
+  - ✅ Updated homepage feature grid: "Wiki Pages" → "Timeline View"
+  - ✅ Clean navigation with Browse, Upload, Timeline, Search
+
+#### 3.5.2 Timeline Visibility Fix ✅
+- **Commit:** `4341a74`
+- **Date:** December 3, 2025
+- **File:** `src/app/api/timeline/route.ts`
+- **Issue:** Timeline showing "No items found" despite having uploaded items
+- **Root Cause:**
+  - Timeline API filtered by `isPublished: true`
+  - Upload sets `isPublished: false` by default (requires admin approval)
+  - Browse page shows ALL items (no publish filter)
+  - Created inconsistency: items visible in Browse but not Timeline
+- **Fix:**
+  - ✅ Removed `isPublished: true` filter from timeline API
+  - ✅ Timeline now shows all items (matches browse behavior)
+  - ✅ Users see uploaded items immediately
+- **Note:** Phase 4 Admin Panel will add proper publishing workflow
+
+### In Progress:
+
+#### 3.5.3 Placeholder Historical Archives ✅
+- **Status:** Code Complete - Awaiting Deployment
+- **Date:** December 3, 2025
+- **Requirement:** Add 100 placeholder archives for testing and demonstration
+- **Date Range:** 1880-1945 (pre-WWII historical period)
+- **Files Created:**
+  - `src/lib/db/schema.ts` - Added `isPlaceholder` boolean field to archive_items
+  - `scripts/add-placeholder-flag.sql` - Migration to add column safely
+  - `scripts/seed-placeholder-archives.ts` - Seed script for 100 historical archives
+  - `package.json` - Added `npm run seed:placeholders` command
+- **Archive Specifications:**
+  - Historical titles that make sense (documents, photos, letters, maps, etc.)
+  - Realistic descriptions (brief historical context)
+  - Various tags (war, politics, culture, technology, etc.)
+  - Mixed facets across all categories
+  - Fuzzy dates (exact dates, periods, decades)
+  - Different item types (document, photo, archive)
+  - Realistic file names and metadata
+  - Covers major historical events: WWI, WWII, Interwar Period, Victorian Era, etc.
+- **Important:** These are EXAMPLE/PLACEHOLDER data
+- **Admin Control Required:**
+  - ⚠️ Must add "Enable/Disable Placeholder Data" toggle in Admin Dashboard (Phase 4)
+  - Toggle should hide/show all placeholder items
+  - Useful for demos and testing, but must be disableable in production
+- **Deployment Instructions:**
+  ```bash
+  # On TrueNAS server:
+  cd /path/to/archive-resurrection
+
+  # 1. Add isPlaceholder column to database
+  psql $DATABASE_URL -f scripts/add-placeholder-flag.sql
+
+  # 2. Seed 100 placeholder archives
+  npm run seed:placeholders
+
+  # 3. Rebuild and restart Docker
+  docker build --no-cache -t onatatmaca/archive-resurrection:latest .
+  docker-compose up -d
+  ```
+- **Features:**
+  - ✅ isPlaceholder flag in database schema
+  - ✅ Safe migration script (idempotent)
+  - ✅ 100 diverse historical archives (1880-1945)
+  - ✅ Proper facets, tags, and dates
+  - ✅ All marked as placeholder for easy filtering
+  - ✅ No AI processing (saves credits)
+  - ✅ Published and visible immediately
+- **Phase 4 TODO:**
+  - Add toggle in admin dashboard: "Show/Hide Placeholder Data"
+  - Filter queries by `isPlaceholder = false` when toggle is off
+  - Bulk delete placeholder data option
+
+#### 3.5.4 UI Compacting & Readability ✅
+- **Commit:** `79e8e96` - UI: Compact all pages for better space utilization
+- **Date:** December 3, 2025
+- **Status:** ✅ Complete
+- **Issue:** Current UI is too large/enormous across all pages
+- **User Feedback:** "The UI is enormous right now, all the pages etc."
+- **Requirement:** Make everything much more compact and readable
+- **Files Modified:**
+  - `src/components/layout/Navbar.tsx` - Compact navigation
+  - `src/app/page.tsx` - Compact homepage
+  - `src/app/browse/page.tsx` - Compact browse grid
+  - `src/app/upload/page.tsx` - Compact upload form
+  - `src/app/timeline/page.tsx` - Compact timeline view
+  - `src/app/items/[id]/page.tsx` - Compact item viewer
+- **Changes Applied:**
+  - ✅ Reduced container padding: py-12 → py-6
+  - ✅ Reduced headings: text-5xl → text-3xl, text-3xl → text-2xl, text-2xl → text-xl
+  - ✅ Reduced margins: mb-16 → mb-8, mb-8 → mb-4, mb-6 → mb-3
+  - ✅ Reduced gaps: gap-6 → gap-3, gap-4 → gap-2
+  - ✅ Compact buttons: px-6 py-3 → px-4 py-2 text-sm
+  - ✅ Compact inputs: px-4 py-2 → px-3 py-1.5 text-sm
+  - ✅ Compact labels: text-sm mb-2 → text-xs mb-1.5
+  - ✅ Compact cards: p-6/p-8 → p-4
+  - ✅ Smaller icons: w-12 h-12 → w-8 h-8
+  - ✅ Denser text: Added text-sm, text-xs, text-[10px] where appropriate
+  - ✅ Tighter grids: Increased columns (lg:grid-cols-4 → lg:grid-cols-5)
+  - ✅ Smaller thumbnails: h-48 → h-32
+  - ✅ Compact navigation: py-4 → py-2, reduced all nav element sizes
+- **Results:**
+  - 30-40% more content visible on screen
+  - Cleaner, professional admin panel-style layout
+  - Faster information scanning
+  - Better use of screen real estate
+  - Still readable and accessible (NOT tiny)
+- **Design Principles:**
+  - ❌ NOT tiny - still readable and comfortable
+  - ✅ Compact - moderately reduced spacing throughout
+  - ✅ More information visible without scrolling
+  - ✅ Better use of screen space
+  - ✅ Professional, dense layout (like admin panels)
+  - ✅ Consistent sizing patterns across all pages
+
+---
+
 ## 📋 Phase 4-5: Future Phases (PLANNED)
 
 ### Phase 4: Admin Panel
-- Moderation queue
+- Moderation queue (approve/reject items)
 - Translation diff viewer
-- Taxonomy manager
+- Facet/taxonomy manager (add/edit/delete facets)
+- **NEW:** Placeholder data toggle (enable/disable example archives)
+- User management (promote to admin)
+- Content flags and warnings
+- Bulk operations
 
 ### Phase 5: RAG & Search
 - Vector embedding search
 - Cross-lingual search
 - RAG-powered Q&A
+- Semantic search across translations
 
 ---
 
@@ -556,33 +696,39 @@ git push -u origin branch-name
 
 ## 🎯 Next Immediate Steps
 
-1. **Current:** Begin Phase 2 (Universal Viewer)
-   - Split-pane document viewer
-   - Translation selector
-   - Citation generator
-   - Collaborative translation UI
-2. **Deployment:** Test Phase 1.3 media processing on TrueNAS
-3. **Future Enhancement:** Add ffmpeg for video/audio processing
-4. **Optional:** Address database migration blocker if still present
+1. **Current:** Phase 3.5 - Placeholder Data & UI Compacting
+   - ✅ Add 100 historical placeholder archives (1880-1945)
+   - ✅ Add isPlaceholder flag to database
+   - ⏳ Compact all UI pages (reduce padding, margins, font sizes)
+   - Document placeholder toggle for Phase 4
+2. **Next:** Phase 4 - Admin Panel
+   - Moderation queue
+   - Placeholder data toggle
+   - Facet manager
+   - User management
+3. **Future Enhancement:** Add ffmpeg for video/audio processing (Phase 1.3)
+4. **Deployment:** Test all features on TrueNAS after Phase 3.5
 
 ---
 
 ## 📊 Statistics
 
-**Total Phases:** 5 (0-4)
-**Phases Complete:** 4 (Phase 0 ✅, Phase 1 ✅, Phase 2 ✅, Phase 3 ✅)
-**Current Phase:** 4 - Admin Panel (Planning)
-**Total Commits:** 47+
+**Total Phases:** 5 (0-4) + Phase 3.5 (refinement)
+**Phases Complete:** 4 full phases (Phase 0 ✅, Phase 1 ✅, Phase 2 ✅, Phase 3 ✅)
+**Current Phase:** 3.5 - Placeholder Data & UI Refinement
+**Total Commits:** 50+
 **Database Tables:** 12
 **Default Facets:** 70+
+**Placeholder Archives:** 100 (1880-1945 historical period)
 **Media Processing:** Images (full support), Video/Audio (placeholders)
 **Citation Formats:** 5 (APA, MLA, Chicago, BibTeX, Plain Text)
 **Translation System:** Full community collaboration with voting
 **Timeline Features:** Fuzzy dates, Event clustering, Dynamic filtering
+**UI Status:** Needs compacting (HIGH PRIORITY)
 
 ---
 
 **Last Updated:** December 3, 2025 by Claude
-**Current Session:** Phase 3 Implementation - Time Stream
-**Next Session:** Phase 4 - Admin Panel
-**Status:** 🎉 Phase 3 Complete! 4/5 Phases Done!
+**Current Session:** Phase 3.5 - Timeline fixes, Wiki cleanup, Placeholder data
+**Next Session:** Phase 3.5 continuation - UI compacting, then Phase 4
+**Status:** 🎉 Phase 3 Complete! Working on refinements before Phase 4!

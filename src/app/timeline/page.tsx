@@ -183,19 +183,19 @@ export default function TimelinePage() {
 
   if (!session) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
+      <div className="container mx-auto px-4 py-6 text-center">
         <p>Please sign in to view the timeline.</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-7xl">
+    <div className="container mx-auto px-4 py-6 max-w-7xl">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-4">
         <div className="flex justify-between items-center mb-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+            <h1 className="text-2xl font-bold mb-2 flex items-center gap-3">
               <Clock className="w-8 h-8" />
               Time Stream
             </h1>
@@ -206,7 +206,7 @@ export default function TimelinePage() {
 
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-700"
           >
             <Filter className="w-4 h-4" />
             Filters {(selectedTags.length + selectedFacets.length > 0) && `(${selectedTags.length + selectedFacets.length})`}
@@ -215,7 +215,7 @@ export default function TimelinePage() {
 
         {/* Filters Panel */}
         {showFilters && (
-          <div className="p-6 border rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900 space-y-6">
+          <div className="p-4 border rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900 space-y-6">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">Filters</h3>
               <button
@@ -396,7 +396,7 @@ export default function TimelinePage() {
                             <div className="absolute -left-[4.5rem] top-4 w-4 h-4 bg-purple-600 rounded-full border-4 border-white dark:border-gray-900 group-hover:scale-125 transition"></div>
 
                             {/* Item card */}
-                            <div className="p-6 border rounded-lg dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-lg transition bg-white dark:bg-gray-900">
+                            <div className="p-4 border rounded-lg dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-lg transition bg-white dark:bg-gray-900">
                               <div className="flex gap-4">
                                 <div className="text-blue-600">{getTypeIcon(item.type)}</div>
                                 <div className="flex-1">
@@ -448,9 +448,9 @@ export default function TimelinePage() {
 
       {/* Stats */}
       {!loading && items.length > 0 && (
-        <div className="mt-12 p-6 border rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+        <div className="mt-12 p-4 border rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
           <h3 className="text-lg font-semibold mb-4">Timeline Statistics</h3>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-3">
             <div>
               <p className="text-2xl font-bold text-blue-600">{items.length}</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">Total Items</p>

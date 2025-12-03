@@ -98,6 +98,7 @@ export const archiveItems = pgTable('archive_items', {
   // Moderation & Quality
   isPublished: boolean('is_published').default(true), // Can be hidden by admins
   isSensitive: boolean('is_sensitive').default(false), // Auto-blur in UI
+  isPlaceholder: boolean('is_placeholder').default(false), // Phase 3.5 - Example/demo data (can be toggled off in admin)
 
   // Ownership and timestamps
   uploaderId: uuid('uploader_id').references(() => users.id).notNull(),
