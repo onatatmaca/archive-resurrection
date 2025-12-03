@@ -325,7 +325,7 @@ export async function POST(request: NextRequest) {
         languageCode: 'en',
         authorId: user.id,
         authorType: 'ai',
-        content: englishTranslation,
+        translatedContent: englishTranslation,
         isOfficial: false,
         status: 'draft', // AI translations start as drafts
       });
