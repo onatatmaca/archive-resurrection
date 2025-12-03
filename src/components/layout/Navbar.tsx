@@ -2,7 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { Archive, Upload, Search, User, LogOut, Grid, FileText, Clock } from "lucide-react";
+import { Archive, Upload, Search, User, LogOut, Grid, Clock } from "lucide-react";
 
 export function Navbar() {
   const { data: session, status } = useSession();
@@ -40,13 +40,6 @@ export function Navbar() {
               >
                 <Clock className="w-4 h-4" />
                 <span>Timeline</span>
-              </Link>
-              <Link
-                href="/wiki/new"
-                className="flex items-center gap-2 hover:text-orange-600 transition"
-              >
-                <FileText className="w-4 h-4" />
-                <span>New Wiki</span>
               </Link>
               <Link
                 href="/search"

@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
-import { FileText, Upload, Search, Sparkles, Grid, BookOpen } from "lucide-react";
+import { FileText, Upload, Search, Sparkles, Grid, Clock } from "lucide-react";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -34,11 +34,11 @@ export default async function Home() {
               Upload File
             </Link>
             <Link
-              href="/wiki/new"
+              href="/timeline"
               className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition flex items-center gap-2"
             >
-              <BookOpen className="w-5 h-5" />
-              New Wiki Page
+              <Clock className="w-5 h-5" />
+              Timeline
             </Link>
             <Link
               href="/search"
@@ -69,10 +69,10 @@ export default async function Home() {
         </div>
 
         <div className="p-6 border rounded-lg dark:border-gray-700">
-          <BookOpen className="w-12 h-12 text-orange-600 mb-4" />
-          <h3 className="text-xl font-semibold mb-2">Wiki Pages</h3>
+          <Clock className="w-12 h-12 text-orange-600 mb-4" />
+          <h3 className="text-xl font-semibold mb-2">Timeline View</h3>
           <p className="text-gray-600 dark:text-gray-400">
-            Create collaborative knowledge pages with markdown support and internal linking
+            Visualize your archive chronologically with fuzzy dates and event clustering
           </p>
         </div>
 
