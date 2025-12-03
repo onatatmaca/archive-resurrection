@@ -30,8 +30,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Install su-exec for user switching in entrypoint
-RUN apk add --no-cache su-exec
+# Install su-exec for user switching in entrypoint and postgresql-client for migrations
+RUN apk add --no-cache su-exec postgresql-client
 
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
@@ -47,6 +47,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder --chown=nextjs:nodejs /app/src/lib/db ./src/lib/db
+
+# Copy scripts directory for database seeding
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 
 # Copy and set permissions for entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
